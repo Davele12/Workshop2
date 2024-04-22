@@ -18,8 +18,8 @@ Before you can run this project, you'll need to have the following installed:
 1. **Clone the repository**
    
    ```bash
-   git clone https://your-repository-url.git
-   cd your-repository-directory
+   git clone https://github.com/Davele12/Workshop2.git
+   cd Workshop2/DavidWorkshop2
    ```
 
 2. **Set up Airflow using Docker**
