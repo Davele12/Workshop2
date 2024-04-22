@@ -7,8 +7,6 @@ from datetime import datetime, timedelta
 import pandas as pd
 import logging
 from store_ops import upload_to_drive
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
 
 logging.basicConfig(level=logging.INFO)
 
@@ -87,20 +85,18 @@ def read_csv(path):
 
 def load_data(df, table_name):
     engine = make_db_engine()
-    with engine.begin() as connection:  # Usar `begin()` para manejar transacciones
-        # Crear un objeto 'raw_connection' que extraiga el verdadero objeto de conexión de la base de datos
+    with engine.begin() as connection: 
         raw_conn = connection.connection
-        # Convertir en un objeto que Pandas pueda utilizar apropiadamente
-        if hasattr(raw_conn, 'cursor'):  # Verificar que el objeto tiene el método cursor
+        if hasattr(raw_conn, 'cursor'):  
             cursor = raw_conn.cursor()
         try:
             df.to_sql(table_name, con=raw_conn, if_exists='replace', index=False)
-            cursor.close()  # Cerrar cursor manualmente después de operar
+            cursor.close()  
         except Exception as e:
             print(f"Error during SQL operation: {e}")
         finally:
             if not cursor.closed:
-                cursor.close()  # Asegurarse que el cursor se cierre si aún está abierto
+                cursor.close() 
 
 def loading_data(path, table_name):
     df = read_csv(path)
