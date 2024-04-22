@@ -1,4 +1,6 @@
-DavidWorkshop2/.venv/
+DavidWorkshop2/dags/credentials.json/
 DavidWorkshop2/config/
 DavidWorkshop2/logs/
 DavidWorkshop2/data/
+.venv/
+.env
